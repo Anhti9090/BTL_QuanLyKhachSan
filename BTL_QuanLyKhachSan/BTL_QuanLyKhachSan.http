@@ -1,0 +1,6 @@
+@BTL_QuanLyKhachSan_HostAddress = http://localhost:5129
+
+GET {{BTL_QuanLyKhachSan_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
