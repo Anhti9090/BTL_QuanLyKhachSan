@@ -1,16 +1,27 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BLL;
+using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Model;
 namespace API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IUserBusiness _userBusiness;
+
+        public UsersController(IUserBusiness userBusiness)
         {
-            return View();
+            _userBusiness = userBusiness;
+        }
+
+        [Route("get-all-users")]
+        [HttpGet]
+        public List<User> GetAll()
+        {
+            return _userBusiness.GetAllUsers();
         }
     }
 }

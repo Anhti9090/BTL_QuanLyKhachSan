@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
 namespace BLL.Interfaces
 {
-    internal interface IUserBusiness
+    public partial interface IUserBusiness
     {
+        List<User> GetAllUsers();
     }
 }

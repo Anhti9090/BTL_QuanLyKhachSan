@@ -1,6 +1,6 @@
 @BTL_QuanLyKhachSan_HostAddress = http://localhost:5129
 
-GET {{BTL_QuanLyKhachSan_HostAddress}}/weatherforecast/
+GET {{BTL_QuanLyKhachSan_HostAddress}}/get-all-users/
 Accept: application/json
 
 ###

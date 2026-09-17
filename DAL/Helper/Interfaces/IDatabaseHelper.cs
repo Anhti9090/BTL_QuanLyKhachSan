@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace DAL.Helper.Interfaces
 {
     public interface IDatabaseHelper
     {
-
+        /// <summary>
+        /// Create and return an open DB connection.
+        /// </summary>
+        IDbConnection CreateConnection();
     }
 }
