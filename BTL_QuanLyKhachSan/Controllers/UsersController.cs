@@ -26,16 +26,23 @@ namespace API.Controllers
 
         [Route("create-user")]
         [HttpPost]
-        public User CreateUser([FromBody] User thongtin)
+        public IActionResult CreateUser([FromBody] User thongtin)
         {
             try
             {
                 thongtin.User_Id = Guid.NewGuid().ToString();
-                _userBusiness.Create(thongtin);
-                return thongtin;
+                bool isCreate = _userBusiness.Create(thongtin);
+                if (isCreate)
+                    return Ok(thongtin);
+                return BadRequest(new { message = "Không thể tạo người dùng!" });
+                //return thongtin;
             } catch (Exception ex)
             {
-                throw new Exception("Có lỗi xảy ra khi tạo người dùng: " + ex.Message);
+                if (ex.Message.Contains("đã tồn tại"))
+                {
+                    return BadRequest(new { message = ex.Message });
+                }
+                return StatusCode(500, new { message = "Lỗi hệ thống: " + ex.Message });
             }
         }
         [Route("update-user")]

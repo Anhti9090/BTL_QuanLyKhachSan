@@ -40,6 +40,14 @@ namespace DAL
             {
                 using (var connection = _dbHelper.CreateConnection())
                 {
+                    string checkSql = "SELECT COUNT(1) FROM [dbo].[user] WHERE [taikhoan] = @Taikhoan";
+
+                    int exists = connection.ExecuteScalar<int>(checkSql, new { Taikhoan = thongtin.Taikhoan });
+
+                    if (exists > 0)
+                    {
+                        throw new Exception("Tài khoản này đã tồn tại trong hệ thống. Vui lòng chọn tên tài khoản khác!");
+                    }
                     string sql = @"INSERT INTO [dbo].[user] 
                                  ([user_id], [hoten], [ngaysinh], [diachi], [gioitinh], [email], [taikhoan], [matkhau], [role], [image_url])
                                  VALUES 
@@ -49,9 +57,9 @@ namespace DAL
                 }
                 //return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         public bool Update(User thongtin)
