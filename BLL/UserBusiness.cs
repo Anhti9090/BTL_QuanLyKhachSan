@@ -35,5 +35,13 @@ namespace BLL
         {
             return _res.Delete(user_Id);
         }
+        public User GetUserById(string user_Id)
+        {
+            return _res.GetUserById(user_Id);
+        }
+        public List<User> Search(string keyword)
+        {
+            return _res.Search(keyword);
+        }
     }
 }

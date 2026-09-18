@@ -104,5 +104,40 @@ namespace DAL
                 throw ex;
             }
         }
+        public User GetUserById(string user_Id)
+        {
+            try
+            {
+                using (var connection = _dbHelper.CreateConnection())
+                {
+                    string sql = @"SELECT TOP (1000)* FROM [dbo].[user] WHERE [user_id] = @User_Id";
+                    var user = connection.QueryFirstOrDefault<User>(sql, new { User_Id = user_Id });
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<User> Search(string keyword)
+        {
+            try
+            {
+                using (var connection = _dbHelper.CreateConnection())
+                {
+                    string sql = @"SELECT TOP (1000) * FROM [dbo].[user] 
+                                   WHERE [hoten] LIKE @Keyword OR 
+                                         [taikhoan] LIKE @Keyword OR 
+                                         [email] LIKE @Keyword";
+                    var users = connection.Query<User>(sql, new { Keyword = $"%{keyword}%" }).ToList();
+                    return users;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

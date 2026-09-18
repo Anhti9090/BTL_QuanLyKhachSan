@@ -13,5 +13,7 @@ namespace BLL.Interfaces
         bool Create(User thongtin);
         bool Update(User thongtin);
         bool Delete(string user_Id);
+        User GetUserById(string user_Id);
+        List<User> Search(string keyword);
     }
 }

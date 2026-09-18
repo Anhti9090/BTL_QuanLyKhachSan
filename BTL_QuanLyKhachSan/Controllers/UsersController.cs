@@ -81,5 +81,40 @@ namespace API.Controllers
                 return BadRequest(new { message = "Có lỗi xảy ra khi xóa người dùng!", error = ex.Message });
             }
         }
+        [Route("get-by-id/{user_Id}")]
+        [HttpGet]
+        public IActionResult GetById(string user_Id)
+        {
+            try
+            {
+                var user = _userBusiness.GetUserById(user_Id);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                {
+                    return NotFound(new { message = "Không tìm thấy người dùng!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Có lỗi xảy ra khi lấy thông tin người dùng!", error = ex.Message });
+            }
+        }
+        [Route("search")]
+        [HttpGet]
+        public IActionResult Search([FromQuery] string keyword)
+        {
+            try
+            {
+                var users = _userBusiness.Search(keyword);
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Có lỗi xảy ra khi tìm kiếm người dùng!", error = ex.Message });
+            }
+        }
     }
 }
