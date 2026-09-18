@@ -27,5 +27,13 @@ namespace BLL
         {
             return _res.Create(thongtin);
         }
+        public bool Update(User thongtin)
+        {
+            return _res.Update(thongtin);
+        }
+        public bool Delete(string user_Id)
+        {
+            return _res.Delete(user_Id);
+        }
     }
 }

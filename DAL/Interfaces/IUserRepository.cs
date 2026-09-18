@@ -11,5 +11,7 @@ namespace DAL
     {
         List<User> GetAllUsers();
         bool Create(User thongtin);
+        bool Update(User thongtin);
+        bool Delete(string user_Id);
     }
 }

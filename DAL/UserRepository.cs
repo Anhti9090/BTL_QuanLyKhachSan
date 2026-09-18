@@ -28,7 +28,8 @@ namespace DAL
                     var users = connection.Query<User>(sql).ToList();
                     return users;
                 }
-            } catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -47,7 +48,50 @@ namespace DAL
                     return rowsAffected > 0;
                 }
                 //return true;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool Update(User thongtin)
+        {
+            try
+            {
+                using (var connection = _dbHelper.CreateConnection())
+                {
+                    string sql = @"UPDATE [dbo].[user] 
+                                 SET [hoten] = @Hoten, 
+                                     [ngaysinh] = @Ngaysinh, 
+                                     [diachi] = @Diachi, 
+                                     [gioitinh] = @Gioitinh, 
+                                     [email] = @Email, 
+                                     [taikhoan] = @Taikhoan, 
+                                     [matkhau] = @Matkhau, 
+                                     [role] = @Role, 
+                                     [image_url] = @Image_Url
+                                 WHERE [user_id] = @User_Id";
+                    int rowsAffected = connection.Execute(sql, thongtin);
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool Delete(string user_Id)
+        {
+            try
+            {
+                using (var connection = _dbHelper.CreateConnection())
+                {
+                    string sql = @"DELETE FROM [dbo].[user] WHERE [user_id] = @User_Id";
+                    int rowsAffected = connection.Execute(sql, new { User_Id = user_Id });
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
