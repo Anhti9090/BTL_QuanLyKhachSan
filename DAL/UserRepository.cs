@@ -20,11 +20,36 @@ namespace DAL
         // Implement the correct interface method
         public List<User> GetAllUsers()
         {
-            using (var connection = _dbHelper.CreateConnection())
+            try
             {
-                string sql = "SELECT TOP (1000) * FROM [dbo].[user]";
-                var users = connection.Query<User>(sql).ToList();
-                return users;
+                using (var connection = _dbHelper.CreateConnection())
+                {
+                    string sql = "SELECT TOP (1000) * FROM [dbo].[user]";
+                    var users = connection.Query<User>(sql).ToList();
+                    return users;
+                }
+            } catch (Exception ex) 
+            {
+                throw ex;
+            }
+        }
+        public bool Create(User thongtin)
+        {
+            try
+            {
+                using (var connection = _dbHelper.CreateConnection())
+                {
+                    string sql = @"INSERT INTO [dbo].[user] 
+                                 ([user_id], [hoten], [ngaysinh], [diachi], [gioitinh], [email], [taikhoan], [matkhau], [role], [image_url])
+                                 VALUES 
+                                 (@User_Id, @Hoten, @Ngaysinh, @Diachi, @Gioitinh, @Email, @Taikhoan, @Matkhau, @Role, @Image_Url)";
+                    int rowsAffected = connection.Execute(sql, thongtin);
+                    return rowsAffected > 0;
+                }
+                //return true;
+            } catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

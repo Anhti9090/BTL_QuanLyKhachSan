@@ -23,5 +23,9 @@ namespace BLL
         {
             return _res.GetAllUsers();
         }
+        public bool Create(User thongtin)
+        {
+            return _res.Create(thongtin);
+        }
     }
 }

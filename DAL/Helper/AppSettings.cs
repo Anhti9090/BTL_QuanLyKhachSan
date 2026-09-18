@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Helper
 {
-    internal class AppSettings
+    public class AppSettings
     {
+        public string Secret { get; set; }
     }
 }

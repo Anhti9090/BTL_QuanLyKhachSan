@@ -10,5 +10,6 @@ namespace DAL
     public interface IUserRepository
     {
         List<User> GetAllUsers();
+        bool Create(User thongtin);
     }
 }

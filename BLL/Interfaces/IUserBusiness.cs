@@ -10,5 +10,6 @@ namespace BLL.Interfaces
     public partial interface IUserBusiness
     {
         List<User> GetAllUsers();
+        bool Create(User thongtin);
     }
 }

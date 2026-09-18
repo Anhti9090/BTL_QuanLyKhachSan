@@ -23,5 +23,14 @@ namespace API.Controllers
         {
             return _userBusiness.GetAllUsers();
         }
+
+        [Route("create-user")]
+        [HttpPost]
+        public User CreateUser([FromBody] User thongtin)
+        {
+            thongtin.User_Id = Guid.NewGuid().ToString();
+            _userBusiness.Create(thongtin);
+            return thongtin;
+        }
     }
 }
